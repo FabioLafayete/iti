@@ -1,3 +1,5 @@
+import 'package:app/modules/galery/gallery_bindings.dart';
+import 'package:app/modules/galery/gallery_page.dart';
 import 'package:app/modules/home/home_binding.dart';
 import 'package:app/modules/home/home_page.dart';
 import 'package:app/route/pages_names.dart';
@@ -9,6 +11,11 @@ abstract class PagesRoutes {
         name: PagesNames.home,
         page: () => HomePage(),
         binding: HomeBindings()
+    ),
+    GetPage(
+        name: PagesNames.gallery,
+        page: () => GalleryPage(),
+        binding: GalleryBindings()
     ),
   ];
 }

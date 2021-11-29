@@ -1,5 +1,6 @@
 import 'package:app/modules/base/base_view_model.dart';
 import 'package:app/modules/home/home_controller.dart';
+import 'package:app/route/pages_names.dart';
 import 'package:app/service/api/home/models/home_response.dart';
 
 class HomeViewModel extends BaseViewModel<HomeController> {
@@ -39,6 +40,9 @@ class HomeViewModel extends BaseViewModel<HomeController> {
       loading(false);
     }
   }
+
+  goToListImages (String breed) => controller.router
+      .toNamed(PagesNames.gallery, payload: {'breed': breed});
   
   @override
   void onReady() {

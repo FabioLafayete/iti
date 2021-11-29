@@ -16,31 +16,30 @@ class HomePage extends BaseWidget<HomeViewModel> {
       appBar: _appBar(),
       background: colors.white,
       loading: viewModel.overlay.isLoading,
-      child: Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            text(
-              'home.title'.tr,
-              textAlign: TextAlign.center,
-              color: Colors.black.withOpacity(0.9),
-              fontSize: width * 0.07,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          text(
+            'home.title'.tr,
+            textAlign: TextAlign.center,
+            color: Colors.black.withOpacity(0.9),
+            fontSize: width * 0.07,
+          ),
+          space(0.03),
+          SearchBreeds(),
+          Obx(() => Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              children: List.generate(
+                  viewModel.filterBreed.length,
+                      (index) => ListBreeds(
+                        breed: viewModel.filterBreed[index],
+                        onTap: () => viewModel.goToListImages(viewModel.filterBreed[index]),
+                  )
+              )..add(EndImage(showText: false)),
             ),
-            space(0.03),
-            SearchBreeds(),
-            Obx(() => Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                children: List.generate(
-                    viewModel.filterBreed.length,
-                        (index) => ListBreeds(
-                      breed: viewModel.filterBreed[index],
-                    )
-                )..add(EndImage(showText: false)),
-              ),
-            )),
-          ],
-        ),
+          )),
+        ],
       ),
     ));
   }

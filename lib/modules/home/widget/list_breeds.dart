@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 class ListBreeds extends BaseWidget {
 
   final String breed;
+  final Function onTap;
 
-  ListBreeds({this.breed});
+  ListBreeds({this.breed, this.onTap});
 
   @override
   Widget build(BuildContext context) {
 
     return GestureDetector(
-      onTap: (){},
+      onTap: onTap,
       child: Container(
         width: width,
         padding: EdgeInsets.all(width * 0.05),
