@@ -1,11 +1,9 @@
 import 'package:app/util/bearer_token.dart';
-import 'package:app/util/colors.dart';
-import 'package:app/util/visual_display.dart';
+import 'package:app/util/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'config/app_config.dart';
 import 'config/app_translation.dart';
 import 'modules/base/base_overlay_view_model.dart';
@@ -25,10 +23,13 @@ void main() async {
         defaultTransition: Transition.topLevel,
         getPages: PagesRoutes.pages,
         locale: Locale('pt', 'BR'),
-        themeMode: ThemeMode.light,
-        color: AppColors().background,
-        translationsKeys: (await AppTranslation().load()).map(
-              (key, value) => MapEntry(key, value.cast<String, String>()),
+        theme: Themes().lightTheme,
+        darkTheme: Themes().darkTheme,
+        translationsKeys: (Get.find<AppTranslation>().map).map(
+              (key, value) => MapEntry(
+            key,
+            value.cast<String, String>(),
+          ),
         ),
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
@@ -40,16 +41,15 @@ void main() async {
 }
 
 Future _preload() async {
-  Intl.defaultLocale = 'pt_BR';
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   Get.put<BaseOverlayViewModel>(BaseOverlayViewModel(), permanent: true);
   Get.put<BearerToken>(BearerToken.instance);
   Get.put(PageRouter.instance(routeControl: PageRouterController()), permanent: true);
   Get.put(Assets.instance(assetBundle: rootBundle));
-  Get.put(AppTranslation.instance);
   Get.put(AppConfig.instance);
-  Get.put(VisualDisplay.instance);
+  Get.put(AppTranslation());
+  await TranslationApi.loadTranslations();
 
   await Future.wait([
     AppConfig().load(),

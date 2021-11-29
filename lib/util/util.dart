@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'assets.dart';
-import 'enum.dart';
 
 enum IOType {
   file,
@@ -25,10 +24,6 @@ class Utils {
     return flatternMap(loadedJson);
   }
 
-  static bool validateKeyByKeyType(KeyType type, String value) {
-    RegExp validation = _keyRegexp[type];
-    return validation.hasMatch(value);
-  }
 
   static Future<Map<String, dynamic>> loadJsonToMap(String assetFile) async {
     return await Assets().loadString(assetFile).then((jsonStr) => jsonDecode(jsonStr));
@@ -62,18 +57,3 @@ class Utils {
   }
 
 }
-
-final Map<KeyType, RegExp> _keyReplacements = {
-  KeyType.document: new RegExp(r'\D'),
-  KeyType.mobile: new RegExp(r'(\+|\-|\s|\(|\))'),
-  KeyType.email: RegExp(r''),
-  KeyType.evp: RegExp(r''),
-};
-
-final Map<KeyType, RegExp> _keyRegexp = {
-  KeyType.document: RegExp(r'(^\d{11}$)|(^\d{14}$)'),
-  KeyType.mobile: RegExp(r'(\d){11,13}$'),
-  KeyType.email: RegExp(
-      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"),
-  KeyType.evp: RegExp(r'^\d{8}-\d{4}-\d{4}-\d{4}-\d{12}$'),
-};

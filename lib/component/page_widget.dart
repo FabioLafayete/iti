@@ -8,16 +8,15 @@ import 'package:get/get.dart';
 abstract class BaseWidget<T> extends StatelessWidget {
 
   final Set<T> _value = Set<T>();
-
-  final Assets assets = Assets();
   final AppColors colors = AppColors();
+  final Assets assets = Assets();
   final AppConfig config = AppConfig();
   final AppTheme appTheme = AppTheme();
 
   final text = AppTheme().text;
 
-  double width = Get.width;
-  double height = Get.height;
+  final double width = Get.width;
+  final double height = Get.height;
 
   Widget space(double value, {bool width = false}){
     return SizedBox(

@@ -1,9 +1,9 @@
-import 'package:app/component/page/page_widget.dart';
+import 'package:app/component/page_widget.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BaseBody extends StatelessWidget {
+class BaseBody extends BaseWidget {
 
   final Widget child;
   final Color background;
@@ -36,7 +36,7 @@ class BaseBody extends StatelessWidget {
               child: !loading ?
               this.child : Center(
                 child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(AppColors().orange)
+                    valueColor: AlwaysStoppedAnimation(colors.primary)
                 ))
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:app/component/base_body.dart';
-import 'package:app/component/page/page_widget.dart';
+import 'package:app/component/page_widget.dart';
 import 'package:app/modules/home/widget/end_image.dart';
 import 'package:app/modules/home/widget/list_breeds.dart';
 import 'package:app/modules/home/widget/search/search.dart';
@@ -14,7 +14,7 @@ class HomePage extends BaseWidget<HomeViewModel> {
   Widget build(BuildContext context) {
     return Obx(() => BaseBody(
       appBar: _appBar(),
-      background: colors.white,
+      background: context.theme.backgroundColor,
       loading: viewModel.overlay.isLoading,
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -22,7 +22,7 @@ class HomePage extends BaseWidget<HomeViewModel> {
           text(
             'home.title'.tr,
             textAlign: TextAlign.center,
-            color: Colors.black.withOpacity(0.9),
+            color: colors.text.withOpacity(0.9),
             fontSize: width * 0.07,
           ),
           space(0.03),
@@ -33,8 +33,8 @@ class HomePage extends BaseWidget<HomeViewModel> {
               children: List.generate(
                   viewModel.filterBreed.length,
                       (index) => ListBreeds(
-                        breed: viewModel.filterBreed[index],
-                        onTap: () => viewModel.goToListImages(viewModel.filterBreed[index]),
+                    breed: viewModel.filterBreed[index],
+                    onTap: () => viewModel.goToListImages(viewModel.filterBreed[index]),
                   )
               )..add(EndImage(showText: false)),
             ),
@@ -46,14 +46,39 @@ class HomePage extends BaseWidget<HomeViewModel> {
 
   Widget _appBar() {
     return AppBar(
-      backgroundColor: colors.orange,
+      backgroundColor: colors.primary,
       elevation: 0.0,
       centerTitle: true,
+      leading: IconButton(
+        onPressed: (){
+          Get.changeThemeMode(
+              !viewModel.isDarkMode ?
+              ThemeMode.dark :
+              ThemeMode.light
+          );
+          viewModel.setIsDarkMode(!viewModel.isDarkMode);
+        },
+        color: colors.textSecondary,
+        icon: Icon(viewModel.isDarkMode ?
+            Icons.dark_mode_outlined :
+            Icons.light_mode_outlined
+        ),
+      ),
       title: Image.asset(
         assets.logo,
         width: width * 0.38,
-        color: colors.white,
+        color: colors.textSecondary,
       ),
+      actions: [
+        IconButton(
+            icon: text('🇧🇷', fontSize: 30), 
+            onPressed: () => Get.updateLocale(Locale('pt', 'BR'))
+            ),
+        IconButton(
+            icon: text('🇺🇸', fontSize: 30), 
+            onPressed: () => Get.updateLocale(Locale('en', 'US'))
+            ),
+      ],
     );
   }
 }

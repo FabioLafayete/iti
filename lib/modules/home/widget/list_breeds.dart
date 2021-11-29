@@ -1,4 +1,4 @@
-import 'package:app/component/page/page_widget.dart';
+import 'package:app/component/page_widget.dart';
 import 'package:flutter/material.dart';
 
 class ListBreeds extends BaseWidget {
@@ -21,16 +21,16 @@ class ListBreeds extends BaseWidget {
             bottom: width * 0.02
         ),
         decoration: BoxDecoration(
-            color: colors.orange.withOpacity(0.9),
+            color: colors.primary.withOpacity(0.9),
             borderRadius: BorderRadius.all(Radius.circular(10)),
             border: Border.all(
-                color: Colors.white,
+                color: colors.background,
                 width: 0.3
             )
         ),
         child: text(
           '${breed[0].toUpperCase()}${breed.substring(1)}',
-          color: Colors.white,
+          color: colors.textSecondary,
           fontSize: width * 0.05,
         ),
       ),

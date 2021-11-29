@@ -1,5 +1,6 @@
-import 'package:app/component/page/page_widget.dart';
+import 'package:app/component/page_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class EndImage extends BaseWidget {
 
@@ -9,7 +10,7 @@ class EndImage extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    precacheImage(AssetImage(assets.dog), context);
     return Container(
       margin: EdgeInsets.only(
         top: width * 0.05,
@@ -19,13 +20,12 @@ class EndImage extends BaseWidget {
         children: [
           _image(),
           if(showText)
-            Text(
-                'Que pena, \nacabou as fotos 😩',
-              textAlign: TextAlign.center,
-              style: TextStyle(
+            text(
+              'gallery.endImages'.tr,
+                textAlign: TextAlign.center,
                 fontSize: width * 0.06,
+                color: colors.text,
                 fontWeight: FontWeight.bold
-              ),
             )
         ],
       ),

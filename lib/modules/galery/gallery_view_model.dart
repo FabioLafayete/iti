@@ -5,18 +5,19 @@ import 'gallery_controller.dart';
 
 class GalleryViewModel extends BaseViewModel<GalleryController> {
 
-  //Declaration
-  RxString _breed = RxString('');
+  // Declaration
+  RxString _breed = ''.obs;
   RxList<String> _listImages = RxList<String>([]);
 
-  //GET
+  // GET
   String get breed => _breed.value;
   List<String> get listImages => _listImages;
 
-  //SET
+  // SET
   setBreed(String value) => _breed.value = value;
   setListImages(List<String> value) => _listImages.value = value;
 
+  // Others
   Future getImages(String breed) async {
     try{
       loading(true);

@@ -1,5 +1,5 @@
 import 'package:app/component/base_body.dart';
-import 'package:app/component/page/page_widget.dart';
+import 'package:app/component/page_widget.dart';
 import 'package:app/modules/galery/gallery_view_model.dart';
 import 'package:app/modules/galery/widget/show_images.dart';
 import 'package:app/modules/home/widget/end_image.dart';
@@ -13,13 +13,13 @@ class GalleryPage extends BaseWidget<GalleryViewModel> {
   Widget build(BuildContext context) {
     return Obx(() => BaseBody(
       appBar: _appBar(),
-      background: colors.white,
+      background: colors.background,
       loading: viewModel.overlay.isLoading,
       child: Column(
         children: [
           text('gallery.title'.tr,
               textAlign: TextAlign.center,
-              color: Colors.black.withOpacity(0.9),
+              color: colors.text.withOpacity(0.9),
               fontSize: width * 0.07
           ),
           space(0.01),
@@ -39,12 +39,12 @@ class GalleryPage extends BaseWidget<GalleryViewModel> {
 
   Widget _appBar(){
     return AppBar(
-        backgroundColor: colors.orange,
+        backgroundColor: colors.primary,
         elevation: 0.0,
         centerTitle: true,
         title: viewModel.breed.length > 0 ? text(
           '${viewModel.breed[0].toUpperCase()}${viewModel.breed.substring(1)}',
-          color: Colors.white,
+          color: colors.textSecondary,
           fontSize: width * 0.06,
         ) : text('')
     );

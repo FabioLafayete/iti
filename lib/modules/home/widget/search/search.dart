@@ -1,4 +1,4 @@
-import 'package:app/component/page/page_widget.dart';
+import 'package:app/component/page_widget.dart';
 import 'package:app/modules/home/widget/search/search_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,10 +13,10 @@ class SearchBreeds extends BaseWidget<SearchViewModel> {
 
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: colors.background,
           borderRadius: BorderRadius.all(Radius.circular(50)),
           border: Border.all(
-              color: Colors.black,
+              color: colors.text,
               width: 0.3
           )
       ),
@@ -26,16 +26,16 @@ class SearchBreeds extends BaseWidget<SearchViewModel> {
       height: width * 0.12,
       child: TextField(
         controller: _controller,
-        style: TextStyle(color: Colors.black.withOpacity(0.9)),
-        cursorColor: Colors.black,
+        style: TextStyle(color: colors.text.withOpacity(0.9)),
+        cursorColor: colors.text,
         inputFormatters: [LengthLimitingTextInputFormatter(25)],
         decoration: InputDecoration(
           hintText: 'home.search'.tr,
-          hintStyle: TextStyle(color: Colors.black.withOpacity(0.8)),
+          hintStyle: TextStyle(color: colors.text.withOpacity(0.8)),
           contentPadding: EdgeInsets.only(top: width * 0.1),
           icon: Icon(
             Icons.search,
-            color: colors.orange,
+            color: colors.primary,
             size: width * 0.07,
           ),
           suffixIcon: IconButton(
@@ -47,7 +47,7 @@ class SearchBreeds extends BaseWidget<SearchViewModel> {
             padding: EdgeInsets.only(bottom: width * 0.1),
             icon: Icon(
               Icons.clear,
-              color: colors.orange,
+              color: colors.primary,
               size: width * 0.07
             ),
           ),

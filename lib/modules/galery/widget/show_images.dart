@@ -1,5 +1,6 @@
-import 'package:app/component/page/page_widget.dart';
+import 'package:app/component/page_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'image_detail.dart';
 
@@ -18,11 +19,7 @@ class ShowImage extends BaseWidget {
           bottom: width * 0.01
       ),
       child: GestureDetector(
-        onTap: (){
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context)=>DetailImage(image: image))
-          );
-        },
+        onTap: () => Get.to(DetailImage(image: image)),
         child: _image(),
       )
     );
@@ -36,17 +33,17 @@ class ShowImage extends BaseWidget {
           width: width,
           height: width * 0.6,
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: colors.background,
               borderRadius: BorderRadius.all(Radius.circular(10)),
               border: Border.all(
-                  color: colors.orange,
+                  color: colors.primary,
                   width: 2
               )
           ),
           child: Center(
             child: Icon(
               Icons.pets,
-              color: colors.orange,
+              color: colors.primary,
               size: width * 0.25,
             ),
           ),
